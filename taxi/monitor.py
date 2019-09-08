@@ -5,7 +5,7 @@ import numpy as np
 from tqdm import tqdm
 
 
-def interact(env, agent, num_episodes=20000, window=100):
+def interact(env, agent, num_episodes=20000, window=100, decay_epsilon=100):
     """ Monitor agent's performance.
 
     Params
@@ -33,7 +33,7 @@ def interact(env, agent, num_episodes=20000, window=100):
         # begin the episode
         state = env.reset()
         # defining epsilon
-        e = 1 / (i_episode/8000 + 1)
+        e = 1 / (i_episode/decay_epsilon + 1)
         # initialize the sampled reward
         samp_reward = 0
         while True:
