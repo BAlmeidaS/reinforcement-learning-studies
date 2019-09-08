@@ -1,0 +1,15 @@
+alpha: 0.1 gamma: 0.95 decay: 30 - avg_reward: 8.62
+alpha: 0.1 gamma: 1.0 decay: 30 - avg_reward: 8.62
+alpha: 0.1 gamma: 1.0 decay: 70 - avg_reward: 8.38
+alpha: 0.1 gamma: 0.95 decay: 70 - avg_reward: 8.26
+alpha: 0.95 gamma: 1.0 decay: 70 - avg_reward: 8.24
+alpha: 0.1 gamma: 0.99 decay: 70 - avg_reward: 8.11
+alpha: 0.1 gamma: 0.9 decay: 30 - avg_reward: 7.85
+alpha: 1.0 gamma: 1.0 decay: 70 - avg_reward: 7.8
+alpha: 1.0 gamma: 0.99 decay: 100 - avg_reward: 7.78
+alpha: 0.2 gamma: 1.0 decay: 150 - avg_reward: 7.71
+alpha: 0.95 gamma: 0.99 decay: 150 - avg_reward: 7.55
+alpha: 0.5 gamma: 0.9 decay: 150 - avg_reward: -43.59
+alpha: 0.9 gamma: 0.9 decay: 70 - avg_reward: -54.46
+alpha: 1.0 gamma: 0.95 decay: 150 - avg_reward: -78.68
+alpha: 0.95 gamma: 0.9 decay: 100 - avg_reward: -115.25
