@@ -31,11 +31,13 @@ def interact(env, agent, num_episodes=20000, window=100):
     for i_episode in range(1, num_episodes+1):
         # begin the episode
         state = env.reset()
+        # defining epsilon
+        e = 1 / (i_episode/8000 + 1)
         # initialize the sampled reward
         samp_reward = 0
         while True:
             # agent selects an action
-            action = agent.select_action(state)
+            action = agent.select_action(state, e)
             # agent performs the selected action
             next_state, reward, done, _ = env.step(action)
             # agent performs internal updates based on sampled experience
@@ -56,8 +58,8 @@ def interact(env, agent, num_episodes=20000, window=100):
             # update best average reward
             if avg_reward > best_avg_reward:
                 best_avg_reward = avg_reward
-            #condition to collect data to plot
-            if (i_episode % (window*10) == 0):
+            # condition to collect data to plot
+            if (i_episode % window == 0):
                 plot_rewards.append(avg_reward)
         # monitor progress
         print("\rEpisode {}/{} || Best average reward {}".format(i_episode, num_episodes, best_avg_reward), end="")
@@ -66,5 +68,6 @@ def interact(env, agent, num_episodes=20000, window=100):
         if best_avg_reward >= 9.7:
             print('\nEnvironment solved in {} episodes.'.format(i_episode), end="")
             break
-        if i_episode == num_episodes: print('\n')
+        if i_episode == num_episodes:
+            print('\n')
     return avg_rewards, best_avg_reward, plot_rewards
