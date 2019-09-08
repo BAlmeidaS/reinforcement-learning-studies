@@ -25,6 +25,8 @@ def interact(env, agent, num_episodes=20000, window=100):
     best_avg_reward = -math.inf
     # initialize monitor for most recent rewards
     samp_rewards = deque(maxlen=window)
+    # initialize plot rewards to plot them after
+    plot_rewards = deque(maxlen=num_episodes)
     # for each episode
     for i_episode in range(1, num_episodes+1):
         # begin the episode
@@ -54,6 +56,9 @@ def interact(env, agent, num_episodes=20000, window=100):
             # update best average reward
             if avg_reward > best_avg_reward:
                 best_avg_reward = avg_reward
+            #condition to collect data to plot
+            if (i_episode % (window*10) == 0):
+                plot_rewards.append(avg_reward)
         # monitor progress
         print("\rEpisode {}/{} || Best average reward {}".format(i_episode, num_episodes, best_avg_reward), end="")
         sys.stdout.flush()
@@ -62,4 +67,4 @@ def interact(env, agent, num_episodes=20000, window=100):
             print('\nEnvironment solved in {} episodes.'.format(i_episode), end="")
             break
         if i_episode == num_episodes: print('\n')
-    return avg_rewards, best_avg_reward
+    return avg_rewards, best_avg_reward, plot_rewards
