@@ -29,7 +29,7 @@ def interact(env, agent, num_episodes=20000, window=100, decay_epsilon=100):
     # initialize plot rewards to plot them after
     plot_rewards = deque(maxlen=num_episodes)
     # for each episode
-    for i_episode in tqdm(range(1, num_episodes+1)):
+    for i_episode in tqdm(range(1, num_episodes+1), desc='training', leave=False):
         # begin the episode
         state = env.reset()
         # defining epsilon
@@ -63,11 +63,11 @@ def interact(env, agent, num_episodes=20000, window=100, decay_epsilon=100):
             if (i_episode % window == 0):
                 plot_rewards.append(avg_reward)
         # monitor progress
-        print("\rEpisode {}/{} || Best average reward {}".format(i_episode, num_episodes, best_avg_reward), end="")
+        # print("\rEpisode {}/{} || Best average reward {}".format(i_episode, num_episodes, best_avg_reward), end="")
         # check if task is solved (according to OpenAI Gym)
         if best_avg_reward >= 9.7:
-            print('\nEnvironment solved in {} episodes.'.format(i_episode), end="")
+            # print('\nEnvironment solved in {} episodes.'.format(i_episode), end="")
             break
-        if i_episode == num_episodes:
-            print('\n')
+        # if i_episode == num_episodes:
+            # print('\n')
     return avg_rewards, best_avg_reward, plot_rewards

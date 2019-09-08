@@ -2,7 +2,7 @@ import numpy as np
 from collections import defaultdict
 
 
-class Agent:
+class AgentExpectedSarsa:
     def __init__(self, nA=6, alpha=0.9, gamma=1):
         """ Initialize agent.
 
