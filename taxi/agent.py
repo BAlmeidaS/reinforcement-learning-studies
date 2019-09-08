@@ -3,8 +3,7 @@ from collections import defaultdict
 
 
 class Agent:
-
-    def __init__(self, nA=6):
+    def __init__(self, nA=6, alpha=0.9, gamma=1):
         """ Initialize agent.
 
         Params
@@ -12,6 +11,8 @@ class Agent:
         - nA: number of actions available to the agent
         """
         self.nA = nA
+        self.alpha = alpha
+        self.gamma = gamma
         self.Q = defaultdict(lambda: np.zeros(self.nA))
 
     def select_action(self, state, epsilon):
@@ -28,7 +29,7 @@ class Agent:
         return np.random.choice(self.nA,
                                 p=self._epsilon_policy(self.Q[state], epsilon))
 
-    def step(self, state, action, reward, next_state, done):
+    def step(self, state, action, reward, next_state, done, epsilon):
         """ Update the agent's knowledge, using the most recently sampled tuple.
 
         Params
@@ -39,7 +40,12 @@ class Agent:
         - next_state: the current state of the environment
         - done: whether the episode is complete (True or False)
         """
-        self.Q[state][action] += reward
+        future_policy = self._epsilon_policy(self.Q[next_state], epsilon)
+
+        self.Q[state][action] += self.alpha * (reward
+                                               + (self.gamma
+                                                  * future_policy.dot(self.Q[next_state]))
+                                               - self.Q[state][action])
 
     def _epsilon_policy(self, q_s, e):
         if np.array_equal(q_s, np.zeros(self.nA)):
