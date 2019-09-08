@@ -18,14 +18,15 @@ import ray
 def main():
     env = gym.make('Taxi-v3')
 
-    agent = AgentMaxQ(alpha=0.1, gamma=1)
-    avg_rewards, best_avg_reward, plot_rewards = interact(env, agent, 20000, decay_epsilon=25)
+    agent = AgentMaxQ(alpha=.2, gamma=1)
+    avg_rewards, best_avg_reward, plot_rewards = interact(env, agent, 100000, decay_epsilon=10)
 
     print(f"best_avg_reward: {best_avg_reward}")
 
     # plot performance
-    plt.plot(np.linspace(0, 20000, len(plot_rewards), endpoint=False),
+    plt.plot(np.linspace(0, 50000, len(plot_rewards), endpoint=False),
              np.asarray(plot_rewards))
+    plt.title(f'Best Reward: {best_avg_reward}')
     plt.ylabel('Average Reward')
     plt.xlabel('Episode Number')
     plt.show()

@@ -15,14 +15,14 @@ def epsilon_policy(q_s, e, nA):
     return policy_s
 
 
-def epsilon_policy_new(q_s, e, nA):
-    if np.array_equal(q_s, np.zeros(nA)):
-        return np.ones(nA) * 1/nA
-
-    policy_s = np.zeros(nA)
-    best_action = np.argmax(q_s)
-    policy_s[best_action] = 1
-    return policy_s
+# def epsilon_policy_new(q_s, e, nA):
+#     if np.array_equal(q_s, np.zeros(nA)):
+#         return np.ones(nA) * 1/nA
+#
+#     policy_s = np.zeros(nA)
+#     best_action = np.argmax(q_s)
+#     policy_s[best_action] = 1
+#     return policy_s
 
 
 class Subtask:
