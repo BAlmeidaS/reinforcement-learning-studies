@@ -16,9 +16,9 @@ import ray
 
 
 def main():
-    env = gym.make('Taxi-v3')
+    env = gym.make('Taxi-v2')
 
-    agent = AgentMaxQ(alpha=.2, gamma=1)
+    agent = AgentMaxQ(alpha=.1, gamma=1)
     avg_rewards, best_avg_reward, plot_rewards = interact(env, agent, 100000, decay_epsilon=10)
 
     print(f"best_avg_reward: {best_avg_reward}")
